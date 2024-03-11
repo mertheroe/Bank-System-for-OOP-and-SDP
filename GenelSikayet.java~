@@ -1,0 +1,4 @@
+// ChainRes halka bir
+public class GenelSikayet implements ReportApprover{
+
+}

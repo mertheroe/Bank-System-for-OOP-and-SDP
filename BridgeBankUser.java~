@@ -1,0 +1,10 @@
+// Abstraction sınıfı
+public abstract class BridgeBankUser {
+    protected BridgeBankSystem bankSystem;
+
+    protected BridgeBankUser(BridgeBankSystem bankSystem) {
+        this.bankSystem = bankSystem;
+    }
+
+    public abstract void showInfo();
+}

@@ -1,0 +1,129 @@
+//Mert KAHRAMAN 190101028
+// musteri class?
+public class Customer extends Object{
+  //fieldlar
+  //musteri ismi
+ private String customerFirstName;
+ //musteri soyismi
+ private String customerLastName;
+ //musteri birikim
+ private final Savings customerSavings;
+ //musteri borc
+ private Loan customerLoan;
+ //ne oldu?una dair fikrim yok, rastgele int verdim ******************************
+ private int commission; 
+ //tarih
+ private Date date;
+ 
+ 
+ //customer constructor?
+  public Customer(String customerFirstName, String customerLastName, Savings customerSavings, Loan customerLoan, Date date){
+   this.customerFirstName = customerFirstName;
+   this.customerLastName = customerLastName;
+   // savingsi atayabilmeye calistim
+   customerSavings = new Savings(customerSavings.getInterestRate());
+   this.customerSavings = customerSavings;
+   //ayni sekilde loan?
+   customerLoan = new Loan(customerLoan.getInterestRate(), customerLoan.getLoanLimit(),
+                         customerLoan.getOverdraftPenalty());
+   this.customerLoan = customerLoan;
+   //ayn? sekilde datei
+   date = new Date(date.getDay(),date.getMonth(),date.getYear());
+   this.date = date;
+ }
+ 
+ 
+ //methodlar
+ //first namegetter
+ public String getFirstName(){
+   return customerFirstName;
+ }
+ 
+ //firstname setter
+ public void setFirstName(String ad){
+   this.customerFirstName = ad;
+ } 
+ 
+ //lastname getter
+ public String getLastName(){
+   return customerLastName;
+ }
+ 
+ //lastname setter
+ public void setLastName(String soyad){
+   this.customerLastName = soyad;
+ }
+  
+  //savings getter
+ public Savings getSavings(){
+   return customerSavings;
+ }
+ 
+ //laon getter
+ public Loan getLoan(){
+   return customerLoan;
+ }
+ 
+ //date getter
+ public Date getDate(){
+   return date;
+ }
+ 
+ //date setter
+ public void setDate(Date tarih){
+   this.date = tarih;
+ }
+ 
+ //current value ama loandan savings �?kar?lm?? balance
+ public double currentValue(){
+   return (this.getSavings().getBalance() - this.getLoan().getBalance());
+ }
+ 
+ //input? savings balance a ekiyor
+ public void deposit(double nakit){
+   this.getSavings().setBalance(this.getSavings().getBalance() + nakit);
+ }
+ 
+ //loan balance? input kadar azalt?yor
+ public void payLoan(double odenen){
+   this.getLoan().setBalance(this.getLoan().getBalance() - odenen);
+ }
+ 
+ //eger input degeri savings balance a esit ya da kucukse, savings balanceiinput kadar dusuruyor ve true donduruyor
+ public boolean withdraw(double cekim){
+   if (cekim <= this.getSavings().getBalance()){
+     this.getSavings().setBalance(this.getSavings().getBalance() - cekim);
+     return true;
+   }
+   else
+     return false;
+ }
+ 
+ //Date class?ndaki methodu cagiriyor, savings balance negatif ise bunu loana tasiyor ve savings balancei
+ //sifir yapiyor. savings ve loan instanceslar?n?n ikisi icin de processDay methodu cagiriyor, eger ay degisirse
+ //processMonthu her ikisi icin de cagiriyor
+ public void incrementDate(){
+   this.getDate().incrementDay();
+   //savingsin balancei negatifse
+   if (this.getSavings().getBalance() < 0){
+     //eksili balancei loana ekleme
+     this.getLoan().setBalance(this.getLoan().getBalance() - this.getSavings().getBalance());
+     //savings balanceini sifir yapma
+     this.getSavings().setBalance(0);
+     //ko?ul sagladiginda processdayleri cagirir
+     this.getSavings().processDay();
+     this.getLoan().processDay();
+     //kosul
+     if (this.getDate().getDay() == 1){
+       //kosul saglandiginda processmothlar
+       this.getSavings().processMonth();
+       this.getLoan().processMonth();
+     }
+   }
+ }
+}
+/* Cash n = new Cash(5)
+ Date d = new Date(10,10,2010)
+ Loan l = new Loan(3,5,10)
+Savings s = new Savings(9)
+ Customer mert = new Customer("Mert","Kahraman",s,l,d)*/ 

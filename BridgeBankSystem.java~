@@ -1,0 +1,4 @@
+// Implementor interface'i
+interface BridgeBankSystem {
+    void showDetails();
+}

@@ -1,0 +1,349 @@
+Mert Kahraman 190101028
+//constructorlı classımın çalıştığını test ettim
+//Date j = new Date(1, 1, 1)
+// privatelamayı unutmuşum, hepsini privatelayınca değer alamadım
+//en azından test için gettera ihtiyacım var
+//testini yapıyorum ilk getterla
+//> Date j = new Date(1, 1, 1)
+> j.getDay
+Static Error: No field in Date has name 'getDay'
+> j.getDay()
+1
+//hatalı durum(gün32) için deniyorum
+> Date j = new Date(32, 1, 1)
+> j.getDay()
+0
+//ay için uygun durum
+> Date j = new Date(32, 1, 1)
+> j.getMonth()
+1
+//yanlış durum
+> Date j = new Date(32, 13, 1)
+> j.getMonth()
+0
+//yıl için yanlış durum yok, direkt deniyorum
+> Date j = new Date(32, 13, 2022)
+> j.getYear()
+2022
+//setter gerekşyor!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!(ödevde bu class için setter methoduna izin verilmemiş fakat başka türlü yapılamıyor.
+//farklı bir eğitim görevlisine de sordum setter gerekiyor dedi.
+//day setterı test
+> Date j = new Date(32, 13, 2022)
+> j.setDay(5)
+> j.getDay()
+5
+//day setterı geçersiz kontrol
+> Date j = new Date(5, 13, 2022)
+> j.setDay(35)
+> j.getDay()
+5
+//month setterı test
+> Date j = new Date(32, 13, 2022)
+> j.setMonth(6)
+> j.getMonth()
+6
+year setterı kontrol
+> Date j = new Date(32, 13, 2022)
+> j.setYear(2013)
+> j.getYear()
+2013
+//incrementDay methodu testleri
+> Date j = new Date(4,10,2012)
+> j.getDay()
+4
+> j.incrementDay()
+> j.getDay()
+5
+//günün 31 olduğu zamanki testler
+> Date j = new Date(31,10,2012)
+> j.getDay()
+31
+> j.incrementDay()
+> j.getDay()
+1
+//ayın 1 atlamasının testi
+> Date j = new Date(31,10,2012)
+> j.incrementDay()
+> j.getDay()
+1
+> j.getMonth()
+11
+//yıl atlama test
+> Date j = new Date(31,12,2012)
+> j.incrementDay()
+> j.getDay()
+1
+> j.getMonth()
+1
+> j.getYear()
+2013
+//tostring override test
+ Date j = new Date(31,12,2012)
+> j.toString()
+"31/12/2012"
+>
+//equals testleri
+> Date j = new Date(31,12,2012)
+> Date k = new Date(31,12,2012)
+> j.equals(k)
+true
+> Date k = new Date(19,10,2005)
+> j.equals(k)
+false
+ Object z = new Object()
+> j.equals(z)
+false
+/////////////////////////////// Cash Class/////////////////////
+//balance alma testi
+Cash c = new Cash(0.5)
+> c.getBalance()
+0.0
+//intrate getter
+Cash c = new Cash(0.5)
+> c.getInterestRate()
+0.5
+//intrate setter
+> Cash c = new Cash(0.5)
+> c.setInterestRate(0.7)
+> c.getInterestRate()
+0.7
+//balance setter
+> Cash c = new Cash(0.5)
+> c.setBalance(10)
+> c.getBalance()
+10.0
+//transfer test
+> Cash c = new Cash(0.5)
+> c.setBalance(10)
+> c.getBalance()
+10.0
+> c.transfer(3)
+> c.getBalance()
+7.0
+// Interest earned getter setter
+> Cash c = new Cash(0.5)
+> c.setInterestEarned(9)
+> c.getInterestEarned()
+9.0
+// procesday test
+> Cash c = new Cash(300)
+> c.setInterestEarned(9)
+> c.setBalance(10)
+> c.processDay()
+> c.getBalance()
+17.21917808219178
+//process month test
+> Cash c = new Cash(300)
+> c.setBalance(10)
+> c.setInterestEarned(9)
+> c.processMonth()
+> c.getBalance()
+19.0
+> c.getInterestEarned()
+0.0
+////////////////////////////savingsclass//////
+// deposit test
+> Savings s = new Savings(300)
+> s.getBalance()
+0.0
+> s.deposit(13)
+> s.getBalance()
+13.0
+//withdraw test
+> Savings s = new Savings(300)
+> s.setBalance(16)
+> s.withdraw(5)
+true
+> s.getBalance()
+11.0
+> s.setBalance(16)
+> s.withdraw(17)
+false
+//////////////////////////////Loanclass//////
+//loan limit getter test
+> Loan j = new Loan(300,1000,90)
+> j.getLoanLimit()
+1000.0
+//loan limit setter test
+> Loan j = new Loan(300,1000,90)
+> j.getLoanLimit()
+1000.0
+> j.setLoanLimit(5)
+> j.getLoanLimit()
+5.0
+//overdraft penalty getter
+> Loan j = new Loan(300,1000,90)
+> j.getOverdraftPenalty()
+90.0
+//overdraft penalty setter
+> Loan j = new Loan(300,1000,90)
+> j.getOverdraftPenalty()
+90.0
+> j.setOverdraftPenalty(200)
+> j.getOverdraftPenalty()
+200.0
+// processDay test
+> Loan j = new Loan(300,1000,90)
+> j.setBalance(500)
+> j.getBalance()
+500.0
+> j.processDay()
+> j.getBalance()
+410.958904109589
+> j.getIsLoanDrafted()
+false
+> j.setBalance(5000)
+> j.getBalance()
+5000.0
+> j.processDay()
+> j.getIsLoanDrafted()
+true
+//process month testi
+> Loan j = new Loan(300,1000,90)
+> j.setInterestEarned(100)
+> j.getInterestEarned()
+100.0
+> j.setBalance(290)
+> j.getBalance()
+290.0
+> j.setIsLoanDrafted(true)
+> j.processMonth()
+> j.getBalance()
+480.0
+> j.processMonth()
+> j.getBalance()
+480.0
+////////////////////////////////////customerclass////////////////////////
+//constructor test
+> Cash n = new Cash(5)
+> Date d = new Date(10,10,2010)
+> Loan l = new Loan(3,5,10)
+> Savings s = new Savings(9)
+> Customer mert = new Customer("Mert","Kahraman",s,l,d)
+//firstname getter
+> Cash n = new Cash(5)
+> Date d = new Date(10,10,2010)
+> Loan l = new Loan(3,5,10)
+> Savings s = new Savings(9)
+> Customer mert = new Customer("Mert","Kahraman",s,l,d)
+> mert.getFirstName()
+"Mert"
+//firstname setter
+> Cash n = new Cash(5)
+> Date d = new Date(10,10,2010)
+> Loan l = new Loan(3,5,10)
+> Savings s = new Savings(9)
+> Customer mert = new Customer("Mert","Kahraman",s,l,d)
+> mert.getFirstName()
+"Mert"
+> mert.setFirstName("Kemal")
+> mert.getFirstName()
+"Kemal"
+//lastname getter
+Cash n = new Cash(5)
+> Date d = new Date(10,10,2010)
+> Loan l = new Loan(3,5,10)
+> Savings s = new Savings(9)
+> Customer mert = new Customer("Mert", "Kahraman", s, l, d)
+> mert.getLastName()
+"Kahraman"
+//lastname setter
+ Cash n = new Cash(5)
+> Date d = new Date(10,10,2010)
+> Loan l = new Loan(3,5,10)
+> Savings s = new Savings(9)
+> Customer mert = new Customer("Mert", "Kahraman", s, l, d)
+> mert.setLastName("Atatürk")
+> mert.getLastName()
+"Atatürk"
+//savings getter
+> mert.getSavings()
+Savings@29e43e5a
+//loangetter
+> mert.getLoan()
+Loan@121c13dc
+//date getterı ve nedense işe yaradı
+> mert.getDate()
+10/10/2010
+//date setter
+mert.getDate()
+10/10/2010
+> Date e = new Date(5,5,2015)
+> mert.setDate(e)
+> mert.getDate()
+5/5/2015
+//customerın loanın balanceı
+ mert.getLoan().getBalance()
+0.0
+//savingsinin int ratei
+mert.getSavings().getInterestRate()
+9.0
+//currentValue test
+> Date d = new Date(10,10,2010)
+> Cash n = new Cash(5)
+> Loan l = new Loan(1,3,5)
+> Savings s = new Savings(9)
+> Customer mert = new Customer("Mert", "Kahraman", s, l, d)
+> mert.getSavings().setBalance(31)
+> mert.currentValue()
+31.0
+//deposit testi
+> Cash n = new Cash(5)
+> Loan l = new Loan(1,3,5)
+> Date d = new Date(10,10,2010)
+> Savings s = new Savings(9)
+> Customer mert = new Customer("Mert", "Kahraman", s, l, d)
+> mert.deposit(5)
+> mert.getSavings().getBalance()
+5.0
+//payLoan kod
+> Cash n = new Cash(5)
+> Loan l = new Loan(1,3,5)
+> Date d = new Date(10,10,2010)
+> Savings s = new Savings(9)
+> Customer mert = new Customer("Mert", "Kahraman", s, l, d)
+> mert.payLoan(15)
+> mert.getLoan().getBalance()
+-15.0
+> //withdraw true test
+Cash n = new Cash(5)
+> Loan l = new Loan(1,3,5)
+> Savings s = new Savings(9)
+> Date d = new Date(10,10,2010)
+> Customer mert = new Customer("Mert", "Kahraman", s, l, d)
+> mert.getSavings().setBalance(10)
+> mert.withdraw(5)
+true
+> mert.getSavings().getBalance()
+5.0
+//withdraw False test
+> Cash n = new Cash(5)
+> Loan l = new Loan(1,3,5)
+> Savings s = new Savings(9)
+> Date d = new Date(10,10,2010)
+> Customer mert = new Customer("Mert", "Kahraman", s, l, d)
+> mert.getSavings().setBalance(10)
+> mert.withdraw(15)
+false
+> mert.getSavings().getBalance()
+10.0
+> 
+//incrementDate testleri oh sonunda
+> Cash n = new Cash(5)
+> Loan l = new Loan(1,3,5)
+> Savings s = new Savings(9)
+> Date d = new Date(10,10,2010)
+> Customer mert = new Customer("Mert", "Kahraman", s, l, d)
+> mert.getSavings().setBalance(-3)
+> mert.getLoan().setBalance(12)
+> mert.getDate().setDay(31)
+> mert.incrementDate()
+> mert.getSavings().getBalance()
+0.0
+> mert.getLoan().getBalance()
+0.0410958904109589
+> mert.getDate().getDay()
+1
+> 
+
+

@@ -1,0 +1,16 @@
+/* // ChainResponsibility uygulama
+
+        // Zinciri oluştur
+        ReportApprover genelSikayet = new GenelSikayet();
+        ReportApprover buyukSikayet = new BuyukSikayet();
+
+        genelSikayet.setNextApprover(buyukSikayet);
+
+        // Sikayet onaylanıyor
+        genelSikayet.approveReport("string gir");
+        // 10dan sonrası ve öncesi
+        //icin farkli handler (class) kullaniyor 
+      
+    }
+}
+*/

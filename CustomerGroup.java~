@@ -1,0 +1,18 @@
+// Grup müşteri sınıfı
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+class CustomerGroup implements CustomerComponent {
+    private List<CustomerComponent> customers = new ArrayList<>();
+
+    public void addCustomer(CustomerComponent customer) {
+        customers.add(customer);
+    }
+
+    @Override
+    public void displayCustomerInfo() {
+        for (CustomerComponent customer : customers) {
+            customer.displayCustomerInfo();
+        }
+    }
+}

@@ -1,0 +1,12 @@
+// Ziyaretçi sınıfı
+public class BankInfoVisitor implements BankVisitor {
+    @Override
+    public void visitCEO(CEO ceo) {
+        System.out.println("Bankanın CEO'su: " + ceo.getName());
+    }
+
+    @Override
+    public void visitCustomer(Customer customer) {
+        System.out.println("Müşteri Adı: " + customer.getName() + ", Bakiye: " + customer.getBalance());
+    }
+}

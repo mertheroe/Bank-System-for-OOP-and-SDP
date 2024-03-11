@@ -1,0 +1,5 @@
+Singleton = CEO.java
+Chain of Responsibility = ReportApprover, GenelSikayet, BuyukSikayet, SikayetOnay(main)
+Visitor = BankVisitor,BankSiniflar,BankInfoVisitor,BankVisitorExample(main)
+Iterator and Composite = CustomerComponent, CUstomerGroup, CustomerIterator, CustomerS(main içinde)
+Bridge = BridgeBankSystem, BridgeBankUser, ActiveMember, PassiveMember, BridgeBankExample(main)
